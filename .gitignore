@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de entorno
+backend/.env.production
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs y cache
+logs/
+cache/
+*.log
+
+# Node.js
+node_modules/
+dist/
+build/
+*.lock
+
+# Archivos temporales
+.DS_Store
+Thumbs.db
+
+# Azure
+.azure/
