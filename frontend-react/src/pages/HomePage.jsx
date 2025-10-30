@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SectionCarousel from '../components/SectionCarousel';
 import { useNavigate } from 'react-router-dom';
+import config from '../config';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const HomePage = () => {
   useEffect(() => {
     const loadSections = async () => {
       try {
-        const res = await axios.get('http://127.0.0.1:5000/api/sections');
+        const res = await axios.get(`${config.API_BASE_URL}/api/sections`);
         setSections(res.data);
       } catch (err) {
         console.error('Error loading sections:', err);
