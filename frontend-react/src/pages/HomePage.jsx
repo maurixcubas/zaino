@@ -22,7 +22,7 @@ const HomePage = () => {
 
     const loadFeaturedProducts = async () => {
       try {
-        const res = await axios.get('http://127.0.0.1:5000/api/products');
+        const res = await axios.get(`${config.API_BASE_URL}/api/products/featured`);
         setFeaturedProducts(res.data.slice(0, 4));
       } catch (err) {
         console.error('Error loading featured products:', err);
