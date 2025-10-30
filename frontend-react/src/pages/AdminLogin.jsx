@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
@@ -9,7 +10,7 @@ const AdminLogin = () => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://127.0.0.1:5000/api/login', {
+      const res = await axios.post(`${config.API_BASE_URL}/api/login`, {
         username,
         password
       });

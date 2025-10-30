@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useCart } from '../context/CartContext'; 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import config from '../config';
 
 const ProductDetailPage = () => {
   const { addToCart } = useCart();
@@ -16,7 +17,7 @@ const ProductDetailPage = () => {
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        const res = await axios.get(`http://127.0.0.1:5000/api/products/${id}`);
+        const res = await axios.get(`${config.API_BASE_URL}/api/products/${id}`);
         setProduct(res.data);
         setCurrentImageIndex(0);
       } catch (err) {

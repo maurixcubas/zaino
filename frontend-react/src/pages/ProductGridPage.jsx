@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // ✅ Añade esta línea
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
+import config from '../config';
 
 const ProductGridPage = () => {
   const { id } = useParams(); // ✅ Usa useParams para obtener el id
@@ -13,7 +14,7 @@ const ProductGridPage = () => {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const res = await axios.get(`http://127.0.0.1:5000/api/sections/${id}/products`);
+        const res = await axios.get(`${config.API_BASE_URL}/api/sections/${id}/products`);
         setProducts(res.data);
       } catch (err) {
         console.error('Error loading products:', err);
@@ -23,7 +24,7 @@ const ProductGridPage = () => {
 
     const loadSectionName = async () => {
       try {
-        const res = await axios.get('http://127.0.0.1:5000/api/sections');
+        const res = await axios.get(`${config.API_BASE_URL}/api/sections`);
         const section = res.data.find(s => s.id === id);
         if (section) {
           setSectionName(section.name);

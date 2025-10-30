@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import config from '../config';
 
 const EditSectionPage = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const EditSectionPage = () => {
   useEffect(() => {
     const loadSection = async () => {
       try {
-        const res = await axios.get(`http://127.0.0.1:5000/api/sections/${id}`);
+        const res = await axios.get(`${config.API_BASE_URL}/api/sections/${id}`);
         setSection(res.data);
       } catch (err) {
         console.error('Error loading section:', err);
@@ -31,7 +32,7 @@ const EditSectionPage = () => {
     formData.append('image', file);
 
     try {
-      const res = await axios.post('http://127.0.0.1:5000/api/upload-image', formData, {
+      const res = await axios.post(`${config.API_BASE_URL}/api/upload-image`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -57,7 +58,7 @@ const EditSectionPage = () => {
 
   const updateSection = async () => {
     try {
-      await axios.put(`http://127.0.0.1:5000/api/sections/${id}`, section);
+      await axios.put(`${config.API_BASE_URL}/api/sections/${id}`, section);
       navigate(`/section/${id}`);
     } catch (err) {
       alert('Error al actualizar sección');

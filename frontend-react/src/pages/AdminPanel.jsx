@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState('products');
@@ -40,7 +41,7 @@ const AdminPanel = () => {
 
   const loadProducts = async () => {
     try {
-      const res = await axios.get('http://127.0.0.1:5000/api/products');
+      const res = await axios.get(`${config.API_BASE_URL}/api/products`);
       setProducts(res.data);
     } catch (err) {
       console.error('Error loading products:', err);
@@ -50,7 +51,7 @@ const AdminPanel = () => {
 
   const loadSections = async () => {
     try {
-      const res = await axios.get('http://127.0.0.1:5000/api/sections');
+      const res = await axios.get(`${config.API_BASE_URL}/api/sections`);
       setSections(res.data);
     } catch (err) {
       console.error('Error loading sections:', err);
@@ -72,10 +73,10 @@ const AdminPanel = () => {
       };
 
       if (editingProduct) {
-        await axios.put(`http://127.0.0.1:5000/api/products/${editingProduct.id}`, productData);
+        await axios.put(`${config.API_BASE_URL}/api/products/${editingProduct.id}`, productData);
         setMessage('Producto actualizado correctamente');
       } else {
-        await axios.post('http://127.0.0.1:5000/api/products', productData);
+        await axios.post(`${config.API_BASE_URL}/api/products`, productData);
         setMessage('Producto agregado correctamente');
       }
 
@@ -91,7 +92,7 @@ const AdminPanel = () => {
   const deleteProduct = async (id) => {
     if (confirm('¿Eliminar este producto?')) {
       try {
-        await axios.delete(`http://127.0.0.1:5000/api/products/${id}`);
+        await axios.delete(`${config.API_BASE_URL}/api/products/${id}`);
         setMessage('Producto eliminado correctamente');
         loadProducts();
       } catch (err) {
@@ -121,10 +122,10 @@ const AdminPanel = () => {
       };
 
       if (editingSection) {
-        await axios.put(`http://127.0.0.1:5000/api/sections/${editingSection.id}`, sectionData);
+        await axios.put(`${config.API_BASE_URL}/api/sections/${editingSection.id}`, sectionData);
         setMessage('Sección actualizada correctamente');
       } else {
-        await axios.post('http://127.0.0.1:5000/api/sections', sectionData);
+        await axios.post(`${config.API_BASE_URL}/api/sections`, sectionData);
         setMessage('Sección agregada correctamente');
       }
 
@@ -140,7 +141,7 @@ const AdminPanel = () => {
   const deleteSection = async (id) => {
     if (confirm('¿Eliminar esta sección?')) {
       try {
-        await axios.delete(`http://127.0.0.1:5000/api/sections/${id}`);
+        await axios.delete(`${config.API_BASE_URL}/api/sections/${id}`);
         setMessage('Sección eliminada correctamente');
         loadSections();
       } catch (err) {
@@ -168,7 +169,7 @@ const AdminPanel = () => {
     formData.append('image', file);
 
     try {
-      const res = await axios.post('http://127.0.0.1:5000/api/upload-image', formData, {
+      const res = await axios.post(`${config.API_BASE_URL}/api/upload-image`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
